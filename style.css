@@ -1,0 +1,37 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+.header {
+  background-color: #2196F3;
+  color: white;
+  padding: 1em;
+  text-align: center;
+}
+.search-bar {
+  margin: 20px;
+  text-align: center;
+}
+.search-bar input {
+  padding: 10px;
+  width: 80%;
+  max-width: 600px;
+  font-size: 16px;
+}
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.gallery-item {
+  border: 1px solid #ccc;
+  margin: 10px;
+  padding: 10px;
+  text-align: center;
+  width: 200px;
+}
+.gallery-item img {
+  max-width: 100%;
+  height: auto;
+}
