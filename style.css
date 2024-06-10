@@ -1,5 +1,6 @@
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f4f4;
   margin: 0;
   padding: 0;
 }
@@ -7,8 +8,9 @@ body {
 .header {
   background-color: #2196F3;
   color: white;
-  padding: 1em;
+  padding: 20px;
   text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .search-bar {
@@ -18,15 +20,27 @@ body {
 
 .search-bar input {
   padding: 10px;
-  width: 80%;
-  max-width: 600px;
+  width: 70%;
+  max-width: 500px;
   font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
 }
 
 .search-bar button {
-  padding: 10px;
+  padding: 10px 20px;
   font-size: 16px;
   margin-left: 10px;
+  border: none;
+  background-color: #2196F3;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.search-bar button:hover {
+  background-color: #45a049;
 }
 
 .add-image-form {
@@ -40,20 +54,48 @@ body {
   border: 1px solid #ccc;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   z-index: 1000;
+  width: 80%;
+  max-width: 500px;
+  border-radius: 10px;
 }
 
 .add-image-form input {
   display: block;
   margin: 10px 0;
   padding: 10px;
-  width: 90%;
-  max-width: 600px;
+  width: 96%;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.add-image-form button {
+  padding: 10px 20px;
+  margin: 10px 5px 0 0;
+  border: none;
+  background-color: #4CAF50;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.add-image-form button:hover {
+  background-color: #45a049;
+}
+
+.add-image-form button#cancelImageBtn {
+  background-color: #f44336;
+}
+
+.add-image-form button#cancelImageBtn:hover {
+  background-color: #e53935;
 }
 
 .gallery {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  padding: 20px;
 }
 
 .gallery.hidden {
@@ -61,14 +103,24 @@ body {
 }
 
 .gallery-item {
-  border: 1px solid #ccc;
+  border: 1px solid #ddd;
   margin: 10px;
   padding: 10px;
   text-align: center;
   width: 200px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+  transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
 .gallery-item img {
   max-width: 100%;
-  height: auto;
+  border-radius: 10px;
+}
+
+.image-container {
+  position: relative;
+  display: inline-block;
 }

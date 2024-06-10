@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         {
             date: '1940-11-13',
-            name: ' F-18',
+            name: 'F-18',
             category: 'avion de chasse',
             url: 'public/avionDeChasse.png'
         },
@@ -41,11 +41,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function renderGallery(imagesToRender) {
         galleryContainer.innerHTML = '';
-        imagesToRender.forEach(image => {
+        imagesToRender.forEach((image, index) => {
             const galleryItem = document.createElement('div');
             galleryItem.classList.add('gallery-item');
             galleryItem.innerHTML = `
-                <img src="${image.url}" alt="${image.name}">
+                <div class="image-container">
+                    <img src="${image.url}" alt="${image.name}">
+                </div>
                 <h3>${image.name}</h3>
                 <p>${image.category}</p>
                 <p>${image.date}</p>
