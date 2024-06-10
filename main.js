@@ -34,6 +34,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const galleryContainer = document.getElementById('galleryContainer');
     const searchInput = document.getElementById('searchInput');
+    const addImageBtn = document.getElementById('addImageBtn');
+    const addImageForm = document.getElementById('addImageForm');
+    const submitImageBtn = document.getElementById('submitImageBtn');
+    const cancelImageBtn = document.getElementById('cancelImageBtn');
 
     function renderGallery(imagesToRender) {
         galleryContainer.innerHTML = '';
@@ -58,6 +62,38 @@ document.addEventListener('DOMContentLoaded', () => {
                 image.date.toLowerCase().includes(searchTerm);
         });
         renderGallery(filteredImages);
+    });
+
+    addImageBtn.addEventListener('click', () => {
+        addImageForm.style.display = 'block';
+        galleryContainer.classList.add('hidden');
+    });
+
+    cancelImageBtn.addEventListener('click', () => {
+        addImageForm.style.display = 'none';
+        galleryContainer.classList.remove('hidden');
+    });
+
+    submitImageBtn.addEventListener('click', () => {
+        const imageName = document.getElementById('imageName').value;
+        const imageCategory = document.getElementById('imageCategory').value;
+        const imageDate = document.getElementById('imageDate').value;
+        const imageURL = document.getElementById('imageURL').value;
+
+        if (imageName && imageCategory && imageDate && imageURL) {
+            images.push({
+                date: imageDate,
+                name: imageName,
+                category: imageCategory,
+                url: imageURL
+            });
+
+            renderGallery(images);
+            addImageForm.style.display = 'none';
+            galleryContainer.classList.remove('hidden');
+        } else {
+            alert('Veuillez remplir tous les champs.');
+        }
     });
 
     renderGallery(images);
