@@ -120,7 +120,44 @@ body {
   border-radius: 10px;
 }
 
-.image-container {
-  position: relative;
-  display: inline-block;
+.carousel-container {
+  width: 80%;
+  margin: auto;
+  text-align: center;
 }
+
+.carousel {
+  display: flex;
+  justify-content: center;
+  overflow-x: auto;
+}
+
+.carousel-controls {
+  display: flex;
+  align-items: center;
+}
+
+.carousel-controls button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.carousel-slide {
+  display: flex;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 200px;
+  margin-right: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+}
+
+.carousel-slide img {
+  width: 400px;
+  height: auto;
+  max-height: 300px; 
+  border-radius: 5px 5px 0 0;
+}
+
+/* mettre la bonne taille de chevron */

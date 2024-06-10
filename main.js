@@ -1,33 +1,33 @@
 document.addEventListener('DOMContentLoaded', () => {
     const images = [
-        {
+        {   
             date: '2024-06-09',
-            name: 'ferrari',
-            category: 'formule 1',
+            name: 'Ferrari',
+            category: 'Formule 1',
             url: 'public/f1.png'
         },
         {
             date: '2002-02-08',
-            name: 'M5 compétition',
+            name: 'M5 Compétition',
             category: 'BMW',
             url: 'public/bmw.png'
         },
         {
             date: '2014-08-01',
-            name: 'huracán',
-            category: 'lamborghini',
+            name: 'Huracán',
+            category: 'Lamborghini',
             url: 'public/huracan.png'
         },
         {
             date: '1940-11-13',
             name: 'F-18',
-            category: 'avion de chasse',
+            category: 'Avion de chasse',
             url: 'public/avionDeChasse.png'
         },
         {
             date: '2008-12-09',
-            name: 'tara',
-            category: 'camion',
+            name: 'Tara',
+            category: 'Camion',
             url: 'public/camion.png'
         },
     ];
@@ -38,6 +38,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const addImageForm = document.getElementById('addImageForm');
     const submitImageBtn = document.getElementById('submitImageBtn');
     const cancelImageBtn = document.getElementById('cancelImageBtn');
+    const carouselBtn = document.getElementById('carouselBtn');
+    const carouselContainer = document.getElementById('imageCarousel');
+    const header = document.querySelector('.header');
+
+    let currentImageIndex = 0;
 
     function renderGallery(imagesToRender) {
         galleryContainer.innerHTML = '';
@@ -54,6 +59,54 @@ document.addEventListener('DOMContentLoaded', () => {
             `;
             galleryContainer.appendChild(galleryItem);
         });
+    }
+
+    function renderCarousel(imagesToRender) {
+        carouselBtn.textContent = "Gallery";
+        addImageBtn.style.display = 'none'; 
+        galleryContainer.style.display = 'none'; 
+        searchInput.style.display = 'none';
+
+        carouselContainer.innerHTML = `
+            <div class="carousel-controls">
+                <img src="https://cdn.icon-icons.com/icons2/1674/PNG/512/chevronleft_111012.png" alt="Previous" id="prevBtn">
+                <div class="carousel-slide">
+                    <img src="${imagesToRender[currentImageIndex].url}" alt="${imagesToRender[currentImageIndex].name}">
+                </div>
+                <img src="https://cdn.icon-icons.com/icons2/1674/PNG/512/chevronright_111007.png" alt="Next" id="nextBtn">
+            </div>
+        `;
+
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+
+        prevBtn.addEventListener('click', () => {
+            currentImageIndex = (currentImageIndex - 1 + imagesToRender.length) % imagesToRender.length;
+            updateCarousel();
+        });
+
+        nextBtn.addEventListener('click', () => {
+            currentImageIndex = (currentImageIndex + 1) % imagesToRender.length;
+            updateCarousel();
+        });
+
+        document.addEventListener('keydown', handleKeyPress);
+    }
+
+    function handleKeyPress(event) {
+        if (event.key === 'ArrowLeft') {
+            currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+            updateCarousel();
+        } else if (event.key === 'ArrowRight') {
+            currentImageIndex = (currentImageIndex + 1) % images.length;
+            updateCarousel();
+        }
+    }
+
+    function updateCarousel() {
+        const carouselSlide = document.querySelector('.carousel-slide img');
+        carouselSlide.src = images[currentImageIndex].url;
+        carouselSlide.alt = images[currentImageIndex].name;
     }
 
     searchInput.addEventListener('input', () => {
@@ -94,7 +147,19 @@ document.addEventListener('DOMContentLoaded', () => {
             addImageForm.style.display = 'none';
             galleryContainer.classList.remove('hidden');
         } else {
-            alert('Veuillez remplir tous les champs.');
+            alert('Please fill in all fields.');
+        }
+    });
+
+    carouselBtn.addEventListener('click', () => {
+        if (carouselBtn.textContent === "Carousel") {
+            renderCarousel(images);
+        } else {
+            carouselBtn.textContent = "Carousel";
+            addImageBtn.style.display = 'inline-block'; 
+            galleryContainer.style.display = 'flex'; 
+            searchInput.style.display = 'inline-block';
+            carouselContainer.innerHTML = '';
         }
     });
 

@@ -12,18 +12,21 @@
     </header>
     <div class="search-bar">
         <input type="text" id="searchInput" placeholder="Search images...">
-        <button id="addImageBtn">Ajouter une image</button>
+        <button id="addImageBtn">Add Image</button>
+        <button id="carouselBtn">Carousel</button>
     </div>
     <div class="add-image-form" id="addImageForm">
-        <h2>Ajouter une nouvelle image</h2>
-        <input type="text" id="imageName" placeholder="Nom de l'image">
-        <input type="text" id="imageCategory" placeholder="Catégorie">
+        <h2>Add a New Image</h2>
+        <input type="text" id="imageName" placeholder="Image Name">
+        <input type="text" id="imageCategory" placeholder="Category">
         <input type="date" id="imageDate">
-        <input type="text" id="imageURL" placeholder="URL de l'image">
-        <button id="submitImageBtn">Ajouter</button>
-        <button id="cancelImageBtn">Annuler</button>
+        <input type="text" id="imageURL" placeholder="Image URL">
+        <button id="submitImageBtn">Add</button>
+        <button id="cancelImageBtn">Cancel</button>
     </div>
-    <div class="gallery" id="galleryContainer">
+    <div class="gallery" id="galleryContainer"></div>
+    <div class="carousel-container">
+        <div class="carousel" id="imageCarousel"></div>
     </div>
     <script src="main.js"></script>
 </body>
