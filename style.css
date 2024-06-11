@@ -156,10 +156,10 @@ body {
   display: flex;
   align-items: center;
   position: absolute;
-  top: 50%;
+  top: 150px;
   transform: translateY(-50%);
   width: 100%;
-  justify-content: space-between;
+  justify-content: center;
 }
 
 .carousel-controls img {
