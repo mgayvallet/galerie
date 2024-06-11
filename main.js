@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const images = [
+    let images = JSON.parse(localStorage.getItem('images')) || [
         {   
             date: '2024-06-09',
             name: 'Ferrari',
@@ -40,9 +40,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const cancelImageBtn = document.getElementById('cancelImageBtn');
     const carouselBtn = document.getElementById('carouselBtn');
     const carouselContainer = document.getElementById('imageCarousel');
-    const header = document.querySelector('.header');
 
     let currentImageIndex = 0;
+
+    function saveImagesToLocalStorage() {
+        localStorage.setItem('images', JSON.stringify(images));
+    }
 
     function renderGallery(imagesToRender) {
         galleryContainer.innerHTML = '';
@@ -56,8 +59,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 <h3>${image.name}</h3>
                 <p>${image.category}</p>
                 <p>${image.date}</p>
+                <button class="delete-btn" data-index="${index}">Delete</button>
             `;
             galleryContainer.appendChild(galleryItem);
+        });
+
+        document.querySelectorAll('.delete-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                const index = button.getAttribute('data-index');
+                images.splice(index, 1);
+                saveImagesToLocalStorage();
+                renderGallery(images);
+            });
         });
     }
 
@@ -109,6 +122,13 @@ document.addEventListener('DOMContentLoaded', () => {
         carouselSlide.alt = images[currentImageIndex].name;
     }
 
+    function clearInputFields() {
+        document.getElementById('imageName').value = '';
+        document.getElementById('imageCategory').value = '';
+        document.getElementById('imageDate').value = '';
+        document.getElementById('imageURL').value = '';
+    }
+
     searchInput.addEventListener('input', () => {
         const searchTerm = searchInput.value.toLowerCase();
         const filteredImages = images.filter(image => {
@@ -121,12 +141,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     addImageBtn.addEventListener('click', () => {
         addImageForm.style.display = 'block';
-        galleryContainer.classList.add('hidden');
+        galleryContainer.style.display = 'none';
+        clearInputFields();
     });
 
     cancelImageBtn.addEventListener('click', () => {
         addImageForm.style.display = 'none';
-        galleryContainer.classList.remove('hidden');
+        galleryContainer.style.display = 'flex';
+        clearInputFields();
     });
 
     submitImageBtn.addEventListener('click', () => {
@@ -143,9 +165,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 url: imageURL
             });
 
+            saveImagesToLocalStorage();
             renderGallery(images);
             addImageForm.style.display = 'none';
-            galleryContainer.classList.remove('hidden');
+            galleryContainer.style.display = 'flex';
+            clearInputFields();
         } else {
             alert('Please fill in all fields.');
         }
