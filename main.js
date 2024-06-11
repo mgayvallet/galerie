@@ -40,6 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const cancelImageBtn = document.getElementById('cancelImageBtn');
     const carouselBtn = document.getElementById('carouselBtn');
     const carouselContainer = document.getElementById('imageCarousel');
+    const h1 = document.getElementById('h1');
 
     let currentImageIndex = 0;
 
@@ -76,6 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function renderCarousel(imagesToRender) {
         carouselBtn.textContent = "Gallery";
+        h1.textContent = "Carousel"
         addImageBtn.style.display = 'none'; 
         galleryContainer.style.display = 'none'; 
         searchInput.style.display = 'none';
@@ -180,6 +182,7 @@ document.addEventListener('DOMContentLoaded', () => {
             renderCarousel(images);
         } else {
             carouselBtn.textContent = "Carousel";
+            h1.textContent = "Image Gallery";
             addImageBtn.style.display = 'inline-block'; 
             galleryContainer.style.display = 'flex'; 
             searchInput.style.display = 'inline-block';
